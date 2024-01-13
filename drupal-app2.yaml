@@ -1,0 +1,32 @@
+# drupal-app2.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drupal-app2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drupal-app2
+  template:
+    metadata:
+      labels:
+        app: drupal-app2
+    spec:
+      containers:
+      - name: drupal-app2
+        image: drupal:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: drupal-app2-service
+spec:
+  selector:
+    app: drupal-app2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
