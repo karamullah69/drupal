@@ -13,7 +13,7 @@ pipeline {
                 script {
                     docker.build("helloworld1:${env.BUILD_NUMBER}")
                     docker.build("helloworld2:${env.BUILD_NUMBER}")
-                    docker.withRegistry('https://hub.docker.com/', 'docker-registry-credentials') {
+                    docker.withRegistry('http://0.0.0.0:2375', 'docker-registry-credentials') {
                         docker.image("helloworld1:${env.BUILD_NUMBER}").push()
                         docker.image("helloworld2:${env.BUILD_NUMBER}").push()
                     }
