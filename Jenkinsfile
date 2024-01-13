@@ -24,14 +24,8 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    kubernetesDeploy(
-                        kubeconfigId: 'your-kubeconfig-credentials',
-                        configs: 'drupal-app1.yaml'
-                    )
-                    kubernetesDeploy(
-                        kubeconfigId: 'your-kubeconfig-credentials',
-                        configs: 'drupal-app2.yaml'
-                    )
+                    sh 'kubectl apply -f drupal-app1.yaml'
+                    sh 'kubectl apply -f drupal-app2.yaml'
                 }
             }
         }
