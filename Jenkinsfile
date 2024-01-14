@@ -54,7 +54,6 @@ pipeline {
         stage('Deploy to DrupalApp2') {
             steps {
                 script {
-                    //sh 'sudo apt-get update && apt-get install -y apt-transport-https && echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && apt-get update && apt-get install -y kubectl'
                     // Create a directory for DrupalApp2 artifacts
                     sh 'mkdir -p DrupalApp2/DrupalApp2'
                     // Copy artifacts to DrupalApp2 directory
