@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        KUBE_CONFIG = credentials('4a8a395b-6461-49c3-a397-0746bc1d1348')
+         KUBE_CONFIG_CREDENTIAL_ID = '4a8a395b-6461-49c3-a397-0746bc1d1348'
     }
     stages {
         stage('Checkout') {
@@ -69,15 +69,21 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    def kubeconfig = readFile "${env.KUBE_CONFIG}"
-                    withKubeConfig([credentialsId: 'your-kube-config-credential-id', kubeconfig: kubeconfig]) {
+                     // Retrieve Kubernetes config from Jenkins credentials
+                    def kubeConfig = credentials(KUBE_CONFIG_CREDENTIAL_ID)
+                    
+                    // Write the Kubernetes config to a temporary file
+                    def kubeConfigFile = writeFile(file: 'temp-kube-config', text: kubeConfig)
+                    // Use the temporary Kubernetes config file in kubectl commands
+                   
+                    withKubeConfig([credentialsId: KUBE_CONFIG_CREDENTIAL_ID, kubeconfigFile: kubeConfigFile]) {
+                       // Add deployment steps using kubectl apply
                     sh 'kubectl apply -f DrupalApp1/DrupalApp1.yaml'
                     sh 'kubectl apply -f DrupalApp2/DrupalApp2.yaml'
-                    
-                    // Add deployment steps using kubectl apply
+                    }
                     // This could involve applying Kubernetes manifests
                     // Make sure your Kubernetes manifests reference the correct paths for the HTML files
-                    }
+                    
                 }
             }
         }
