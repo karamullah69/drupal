@@ -68,7 +68,8 @@ pipeline {
             steps {
                 script {
                     sh 'kubectl --version'
-                    sh 'kubectl apply -f manifests/drupal-manifest.yaml --namespace drupal-apps'
+                    sh 'kubectl apply -f DrupalApp1/DrupalApp1.yaml --namespace drupal-apps'
+                    sh 'kubectl apply -f DrupalApp2/DrupalApp2.yaml --namespace drupal-apps'
                     // Add deployment steps using kubectl apply
                     // This could involve applying Kubernetes manifests
                     // Make sure your Kubernetes manifests reference the correct paths for the HTML files
