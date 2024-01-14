@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        KUBE_CONFIG = credentials('your-kube-config-credential-id')
+        KUBE_CONFIG = credentials('4a8a395b-6461-49c3-a397-0746bc1d1348')
     }
     stages {
         stage('Checkout') {
