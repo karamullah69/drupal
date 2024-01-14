@@ -67,7 +67,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh 'kubectl auth can-i create deployment'
+                    
                     sh 'kubectl apply -f manifests/drupal-manifest.yaml'
                     // Add deployment steps using kubectl apply
                     // This could involve applying Kubernetes manifests
