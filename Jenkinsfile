@@ -73,7 +73,7 @@ pipeline {
                     def kubeConfig = credentials(KUBE_CONFIG_CREDENTIAL_ID)
 
                     // Convert the credentials to a string
-                    def kubeConfig = kubeConfigCredentials.string
+                    def kubeConfigString = kubeConfigCredentials.string
                     
                     // Write the Kubernetes config to a temporary file
                     writeFile file: 'temp-kube-config', text: kubeConfig
