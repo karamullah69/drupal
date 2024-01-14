@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git 'https://github.com/karamullah69/drupal.git'
+                    checkout scm
                 }
             }
         }
