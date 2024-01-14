@@ -67,7 +67,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh 'kubectl version'
+                    
                     sh 'kubectl apply -f DrupalApp1/DrupalApp1.yaml '
                     sh 'kubectl apply -f DrupalApp2/DrupalApp2.yaml '
                     // Add deployment steps using kubectl apply
