@@ -67,7 +67,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    sh 'kubectl version'
+                    sh 'kubectl --version'
                     sh 'kubectl apply -f manifests/drupal-manifest.yaml --namespace drupal-apps'
                     // Add deployment steps using kubectl apply
                     // This could involve applying Kubernetes manifests
