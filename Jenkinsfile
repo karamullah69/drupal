@@ -71,11 +71,14 @@ pipeline {
                 script {
                      // Retrieve Kubernetes config from Jenkins credentials
                     def kubeConfig = credentials(KUBE_CONFIG_CREDENTIAL_ID)
+
+                    // Convert the credentials to a string
+                    def kubeConfig = kubeConfigCredentials.string
                     
                     // Write the Kubernetes config to a temporary file
-                    def kubeConfigFile = writeFile(file: 'temp-kube-config', text: kubeConfig)
+                    writeFile file: 'temp-kube-config', text: kubeConfig
+                    
                     // Use the temporary Kubernetes config file in kubectl commands
-                   
                     withKubeConfig([credentialsId: KUBE_CONFIG_CREDENTIAL_ID, kubeconfigFile: kubeConfigFile]) {
                        // Add deployment steps using kubectl apply
                     sh 'kubectl apply -f DrupalApp1/DrupalApp1.yaml'
