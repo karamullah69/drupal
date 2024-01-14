@@ -73,7 +73,7 @@ pipeline {
                     )
                     kubernetesDeploy(
                         kubeconfigId: 'your-kubeconfig-credentials',
-                        configs: DrupalApp2/DrupalApp2.yaml'
+                        configs: 'DrupalApp2/DrupalApp2.yaml'
                     )
                 }
             }
