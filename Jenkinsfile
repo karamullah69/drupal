@@ -67,14 +67,11 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    kubernetesDeploy(
-                        kubeconfigId: 'your-kubeconfig-credentials',
-                        configs: 'DrupalApp1/DrupalApp1.yaml'
-                    )
-                    kubernetesDeploy(
-                        kubeconfigId: 'your-kubeconfig-credentials',
-                        configs: 'DrupalApp2/DrupalApp2.yaml'
-                    )
+                   sh 'kubectl apply -f DrupalApp1/DrupalApp1.yaml'
+                    sh 'kubectl apply -f DrupalApp2/DrupalApp2.yaml'
+                    // Add deployment steps using kubectl apply
+                    // This could involve applying Kubernetes manifests
+                    // Make sure your Kubernetes manifests reference the correct paths for the HTML files
                 }
             }
         }
