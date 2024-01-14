@@ -41,8 +41,10 @@ pipeline {
         stage('Deploy to DrupalApp1') {
             steps {
                 script {
+                    // Create a directory for DrupalApp1 artifacts
+                    sh 'mkdir -p DrupalApp1'
                     // Copy artifacts to DrupalApp1 directory
-                    sh 'cp -r artifacts/helloworld1 /DrupalApp1'
+                    sh 'cp -r artifacts/helloworld1 DrupalApp1'
 
                     // Optionally, you can perform additional deployment steps here
                 }
@@ -52,8 +54,10 @@ pipeline {
         stage('Deploy to DrupalApp2') {
             steps {
                 script {
+                    // Create a directory for DrupalApp2 artifacts
+                    sh 'mkdir -p DrupalApp2'
                     // Copy artifacts to DrupalApp2 directory
-                    sh 'cp -r artifacts/helloworld2 /DrupalApp2'
+                    sh 'cp -r artifacts/helloworld2 DrupalApp2'
 
                     // Optionally, you can perform additional deployment steps here
                 }
