@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Create a directory for DrupalApp1 artifacts
-                    sh 'mkdir -p DrupalApp1'
+                    sh 'mkdir -p DrupalApp1/DrupalApp1'
                     // Copy artifacts to DrupalApp1 directory
                     sh 'cp -r artifacts/helloworld1 DrupalApp1'
 
@@ -55,9 +55,9 @@ pipeline {
             steps {
                 script {
                     // Create a directory for DrupalApp2 artifacts
-                    sh 'mkdir -p DrupalApp2'
+                    sh 'mkdir -p DrupalApp2/DrupalApp2'
                     // Copy artifacts to DrupalApp2 directory
-                    sh 'cp -r artifacts/helloworld2 DrupalApp2'
+                    sh 'cp -r artifacts/helloworld2 DrupalApp2/DrupalApp2'
 
                     // Optionally, you can perform additional deployment steps here
                 }
