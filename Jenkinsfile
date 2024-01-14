@@ -67,12 +67,28 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    
-                    sh 'kubectl apply -f DrupalApp1/DrupalApp1.yaml '
-                    sh 'kubectl apply -f DrupalApp2/DrupalApp2.yaml '
-                    // Add deployment steps using kubectl apply
-                    // This could involve applying Kubernetes manifests
-                    // Make sure your Kubernetes manifests reference the correct paths for the HTML files
+                    // Deploy Drupal applications
+                    kubernetesDeploy(
+                        kubeconfigId: 'your-kubeconfig',
+                        configs: 'drupal-app1.yaml,drupal-app2.yaml',
+                        enableConfigSubstitution: true,
+                        secretName: 'your-k8s-secret'
+                    )
+
+                    // Copy HTML file to Drupal pod
+                    kubernetesExec(
+                        kubeconfigId: 'your-kubeconfig',
+                        podName: 'drupal-app1-6695984fbc-wwv8h', // Update with the actual pod name
+                        containerName: 'drupal',
+                        command: ['cp', '/var/www/html/hello-world.html', '/var/www/html/sites/default/']
+                    )
+
+                    kubernetesExec(
+                        kubeconfigId: 'your-kubeconfig',
+                        podName: 'drupal-app2-7ff667b74-kh5nz', // Update with the actual pod name
+                        containerName: 'drupal',
+                        command: ['cp', '/var/www/html/hello-world.html', '/var/www/html/sites/default/']
+                    )
                 }
             }
         }
